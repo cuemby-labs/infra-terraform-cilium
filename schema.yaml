@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template .
+  title: OpenAPI schema for Cilium template .
 components:
   schemas:
     variables:
@@ -15,10 +15,10 @@ components:
           x-walrus-ui:
             group: Basic
             order: 1
-        cluster_mesh_enabled:
-          title: Cluster Mesh Enabled
+        cluster_ui_enabled:
+          title: Cluster Ui Enabled
           type: boolean
-          description: Enable or disable cluster mesh
+          description: Enable or disable hubble UI
           default: true
           x-walrus-ui:
             group: Basic
@@ -31,11 +31,11 @@ components:
           x-walrus-ui:
             group: Basic
             order: 3
-        version:
-          title: Version
+        helm_release_version:
+          title: Helm Release Version
           type: string
           description: Version of the Cilium chart
-          default: 1.16.1
+          default: 1.16.2
           x-walrus-ui:
             group: Basic
             order: 4
@@ -47,6 +47,38 @@ components:
           x-walrus-ui:
             group: Basic
             order: 5
+        kube_proxy_replacement:
+          title: Kube Proxy Replacement
+          type: boolean
+          description: Enable or disable KubeProxyReplacement.
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 6
+        ipv4_pod_cidrlist:
+          title: Ipv4 Pod Cidrlist
+          type: string
+          description: Cluster Pool IPv4 CIDR list
+          default: 10.0.0.0/16
+          x-walrus-ui:
+            group: Basic
+            order: 7
+        ipv4_native_routing_cidr:
+          title: Ipv4 Native Routing Cidr
+          type: string
+          description: IPv4 native routing CIDR
+          default: 10.0.0.0/8
+          x-walrus-ui:
+            group: Basic
+            order: 8
+        clustermesh_max:
+          title: Clustermesh Max
+          type: string
+          description: Cluster Mesh max cluster connected
+          default: "511"
+          x-walrus-ui:
+            group: Basic
+            order: 9
       x-walrus-ui:
         groupOrder:
         - Basic

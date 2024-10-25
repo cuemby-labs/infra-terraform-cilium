@@ -7,8 +7,8 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "cluster_mesh_enabled" {
-  description = "Enable or disable cluster mesh"
+variable "cluster_ui_enabled" {
+  description = "Enable or disable hubble UI"
   type        = bool
   default     = true
 }
@@ -22,13 +22,37 @@ variable "cluster_id" {
 variable "helm_release_version" {
   description = "Version of the Cilium chart"
   type        = string
-  default     = "1.16.1"
+  default     = "1.16.2"
 }
 
 variable "hubble_enabled" {
   description = "Enable or disable Hubble relay and UI"
   type        = bool
   default     = true
+}
+
+variable "kube_proxy_replacement" {
+  description = "Enable or disable KubeProxyReplacement."
+  type        = bool
+  default     = true
+}
+
+variable "ipv4_pod_cidrlist" {
+  description = "Cluster Pool IPv4 CIDR list"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "ipv4_native_routing_cidr" {
+  description = "IPv4 native routing CIDR"
+  type        = string
+  default     = "10.0.0.0/8"
+}
+
+variable "clustermesh_max" {
+  description = "Cluster Mesh max cluster connected"
+  type        = string
+  default     = "511"
 }
 
 #

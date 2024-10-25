@@ -26,68 +26,33 @@ resource "helm_release" "cilium" {
 
   set {
     name  = "kubeProxyReplacement"
-    value = "false"
+    value = var.kube_proxy_replacement
   }
 
   set {
-    name  = "securityContext.capabilities.ciliumAgent"
-    value = "{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}"
+    name  = "ipam.operator.clusterPoolIPv4PodCIDRList"
+    value = var.ipv4_pod_cidrlist
   }
 
   set {
-    name  = "securityContext.capabilities.cleanCiliumState"
-    value = "{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}"
-  }
-
-  set {
-    name  = "cgroup.autoMount.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "cgroup.hostRoot"
-    value = "/sys/fs/cgroup"
+    name  = "ipv4NativeRoutingCIDR"
+    value = var.ipv4_native_routing_cidr
   }
 
   set {
     name  = "hubble.relay.enabled"
-    value = tostring(var.hubble_enabled)
-  }
-
-  set {
-    name  = "global.clusterName"
-    value = var.cluster_name
-  }
-
-  set {
-    name  = "global.clusterMesh.enabled"
-    value = tostring(var.cluster_mesh_enabled)
-  }
-
-  set {
-    name  = "global.etcd.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "global.serviceType"
-    value = "LoadBalancer"
+    value = var.hubble_enabled
   }
 
   set {
     name  = "hubble.ui.enabled"
-    value = tostring(var.hubble_enabled)
+    value = var.cluster_ui_enabled
+  }
+  set {
+    name  = "clustermesh.maxConnectedClusters"
+    value = var.clustermesh_max
   }
 
-  set {
-    name  = "bpf.masquerade"
-    value = "true"
-  }
-
-  set {
-    name  = "nodePort.enabled"
-    value = "true"
-  }
 }
 
 #
